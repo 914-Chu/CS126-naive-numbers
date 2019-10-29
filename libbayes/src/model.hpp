@@ -19,14 +19,14 @@
  * You can delete this comment once you're done with it.
  */
 
-constexpr size_t NUM_CLASSES = 10;  // 0-9 inclusive
+constexpr size_t kNUM_CLASSES = 10;  // 0-9 inclusive
 
 /**
  * Represents a Naive Bayes classification model for determining the
  * likelihood that an individual pixel for an individual class is
  * white or black.
  */
-struct Model {
+class Model {
     // The individual probabilities for each pixel for each class for
     // whether it's shaded or not.
     //
@@ -36,5 +36,16 @@ struct Model {
     //
     // probs[0][0][0][1] is the computed probability that a pixel at
     // [0][0] for class 0 is shaded.
-    double probs[IMAGE_SIZE][IMAGE_SIZE][NUM_CLASSES][2];
+private:
+    vector<string> lines;
+    vector<Image> images;
+    vector<vector<double>> prob;
+public:
+    Model(){};
+    ~Model(){}
+
+    void setLines(const vector<string> &lines);
+    double probs[kIMAGE_SIZE][kIMAGE_SIZE][kNUM_CLASSES][2];
+    friend istream & operator >> (istream &in,  Model &model);
+    friend ostream & operator << (ostream &out, const Model &model);
 };

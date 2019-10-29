@@ -1,19 +1,23 @@
 #pragma once
 
 #include <cstdlib>
+#include <iostream>
+#include <vector>
 
 /*
  * We've given you a starter class to represent an image.
- * You are totally allowed to delete, change, move, rename, etc. this class
- * however you like! In fact, we encourage it! It only exists as a starting
- * point of reference.
- *
- * You can delete this comment once you're done with it.
  */
-
-constexpr size_t IMAGE_SIZE = 28;
+using namespace std;
+constexpr size_t kIMAGE_SIZE = 28;
 
 class Image {
 private:
-    char pixels[IMAGE_SIZE][IMAGE_SIZE];
+    vector<vector<char>>pixels;
+
+public:
+    Image(){};
+    ~Image(){};
+
+    friend istream & operator >> (istream &in,  Image &image);
+    friend ostream & operator << (ostream &out, const Image &image);
 };
