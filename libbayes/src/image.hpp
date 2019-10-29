@@ -20,6 +20,4 @@ public:
     ~Image(){};
 
     void set(int row, int col, char character);
-    friend istream & operator >> (istream &in,  Image &image);
-    friend ostream & operator << (ostream &out, const Image &image);
 };
