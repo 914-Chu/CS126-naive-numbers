@@ -1,3 +1,7 @@
 cmake-*
 *.o
 .idea/
+/libbayes/src/traininglabels
+/libbayes/src/testimages
+/libbayes/src/testlabels
+/libbayes/src/trainingimages
