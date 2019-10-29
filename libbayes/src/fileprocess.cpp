@@ -2,47 +2,62 @@
 #include "model.hpp"
 #include <iostream>
 #include <fstream>
+#include <sstream>
+#include <cstring>
 #include <string>
 
 using namespace std;
 
 namespace fileprocess {
 
-    istream &operator>>(istream &in, Model &model) {
+    vector<string> GetFileNames(){
 
+        string input;
+        cout << "Please enter file names.";
+        cin >> input;
+        istringstream iss(input);
+        vector<string> file_name;
+        while (getline(iss, input, ' ')) {
+            file_name.push_back(input);
+        }
+        return file_name;
+    }
+    vector<Image> GetImages(vector<string> content) {
+
+        vector<Image> images;
+        for(int line = 0; line < content.size(); line+=kIMAGE_SIZE){
+            Image *image = new Image();
+            for(int row = 0; row < kIMAGE_SIZE; row++){
+                for(int col = 0; col < kIMAGE_SIZE; col++){
+                    image->set(row,col,content[row][col]);
+                }
+            }
+            images.push_back(*image);
+        }
+        return images;
+    }
+
+    vector<char> GetLabels(vector<string> content) {
+        vector<char> characters;
+        for (int i=0; i<content.size(); i++) {
+            characters.push_back(content[i][0]);
+        }
+        return characters;
+    }
+
+    vector<string> ReadFile(string file_name){
+
+        vector<string> content;
         string line;
-        char character;
-        string image_file_name;
-        string label_file_name;
-        vector<string> images;
-        vector<char> labels;
-
-        in >> image_file_name;
-        ifstream image_file(image_file_name);
-        if (image_file.is_open()) {
-            while ( getline (image_file,line) ) {
-                images.push_back(line);
+        ifstream file(file_name);
+        if (file.is_open()) {
+            while ( getline (file,line) ) {
+                content.push_back(line);
             }
-            model.setLines(images);
-            image_file.close();
+            file.close();
         }
-
-        in >> label_file_name;
-        ifstream label_file(label_file_name);
-        if(label_file.is_open()) {
-            while(label_file.get(character)){
-                labels.push_back(character);
-            }
-            label_file.close();
-        }
-
-        return in;
+        return content;
     }
 
-    ostream &operator<<(ostream &out, const string &file_name) {
-
-
-        return out;
-    }
 
 }

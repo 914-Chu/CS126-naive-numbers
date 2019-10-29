@@ -7,8 +7,10 @@
 
 using namespace std;
 
-namespace fileprocess{
+namespace fileprocess {
 
-    istream & operator >> (istream &in,  string &file_name);
-    ostream & operator << (ostream &out, const string &file_name);
+    vector<string> GetFileNames();
+    vector<Image> GetImages(vector<string> content);
+    vector<char> GetLabels(vector<string> content);
+    vector<string> ReadFile(string file_name);
 }

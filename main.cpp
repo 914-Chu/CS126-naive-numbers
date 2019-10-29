@@ -3,27 +3,21 @@
 #include "model.hpp"
 #include <sstream>
 #include <iostream>
+#include <vector>
+#include "fileprocess.h"
 
 int main() {
 
-    Model *model = new Model();
-    string input;
-    cout << "Please enter file names.";
-    cin >> input;
-    istringstream iss(input);
-    vector<string> file_name;
-    while (getline(iss, input, ' ')) {
-        file_name.push_back(input);
+
+    vector<string> file_names = fileprocess::GetFileNames();
+    Model model;
+    if(file_names.size() == 2) {
+        vector<Image> images = fileprocess::GetImages(fileprocess::ReadFile(file_names[0]));
+        vector<char> label = fileprocess::GetLabels(fileprocess::ReadFile(file_names[1]));
+        model.probs = training::ComputeModel(file_names);
+    }else{
+        model = fileprocess::GetModel();
     }
-
-    if (file_name.size() == 2){
-
-    }else if(file_name.size() == 3) {
-
-    }else {
-        cout << "Invalid input." << endl;
-    }
-
 
     return EXIT_SUCCESS;
 }

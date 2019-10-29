@@ -1,7 +1,7 @@
 #pragma once
 
 #include "image.hpp"
-
+#include <vector>
 /*
  * We've given you a starter struct to represent the model.
  * You are totally allowed to delete, change, move, rename, etc. this struct
@@ -20,13 +20,13 @@
  */
 
 constexpr size_t kNUM_CLASSES = 10;  // 0-9 inclusive
-
+const kShade = 2;
 /**
  * Represents a Naive Bayes classification model for determining the
  * likelihood that an individual pixel for an individual class is
  * white or black.
  */
-class Model {
+struct Model {
     // The individual probabilities for each pixel for each class for
     // whether it's shaded or not.
     //
@@ -36,16 +36,15 @@ class Model {
     //
     // probs[0][0][0][1] is the computed probability that a pixel at
     // [0][0] for class 0 is shaded.
-private:
-    vector<string> lines;
-    vector<Image> images;
-    vector<vector<double>> prob;
-public:
-    Model(){};
-    ~Model(){}
 
-    void setLines(const vector<string> &lines);
-    double probs[kIMAGE_SIZE][kIMAGE_SIZE][kNUM_CLASSES][2];
+    //double probs[kIMAGE_SIZE][kIMAGE_SIZE][kNUM_CLASSES][2];
+    vector<vector<vector<vector<double>>>> probs(size_t kIMAGE_SIZE,
+            vector<double>(size_t kIMAGE_SIZE, vector<double>(size_t kNUM_CLASSES, vector<double>(kShade))));
     friend istream & operator >> (istream &in,  Model &model);
     friend ostream & operator << (ostream &out, const Model &model);
 };
+
+namespace training{
+
+    vector<vector<vector<vector<double>>>> ComputeModel(vector<Image> images, vector<char> labels);
+}
