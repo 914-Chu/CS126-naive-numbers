@@ -20,7 +20,7 @@
  */
 
 constexpr size_t kNUM_CLASSES = 10;  // 0-9 inclusive
-const kShade = 2;
+constexpr size_t kShade = 2;
 /**
  * Represents a Naive Bayes classification model for determining the
  * likelihood that an individual pixel for an individual class is
@@ -38,13 +38,11 @@ struct Model {
     // [0][0] for class 0 is shaded.
 
     //double probs[kIMAGE_SIZE][kIMAGE_SIZE][kNUM_CLASSES][2];
-    vector<vector<vector<vector<double>>>> probs(size_t kIMAGE_SIZE,
-            vector<double>(size_t kIMAGE_SIZE, vector<double>(size_t kNUM_CLASSES, vector<double>(kShade))));
-    friend istream & operator >> (istream &in,  Model &model);
-    friend ostream & operator << (ostream &out, const Model &model);
+    vector<vector<vector<vector<double>>>> probs;
 };
 
 namespace training{
 
     vector<vector<vector<vector<double>>>> ComputeModel(vector<Image> images, vector<char> labels);
+    vector<double> GetClassCount(vector<char> labels, int classes);
 }

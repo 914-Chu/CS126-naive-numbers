@@ -14,9 +14,9 @@ int main() {
     if(file_names.size() == 2) {
         vector<Image> images = fileprocess::GetImages(fileprocess::ReadFile(file_names[0]));
         vector<char> label = fileprocess::GetLabels(fileprocess::ReadFile(file_names[1]));
-        model.probs = training::ComputeModel(file_names);
+        model.probs = training::ComputeModel(images, label);
     }else{
-        model = fileprocess::GetModel();
+        model.probs = fileprocess::GetModel(fileprocess::ReadFile(file_names[0]));
     }
 
     return EXIT_SUCCESS;
