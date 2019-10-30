@@ -1,4 +1,5 @@
 #include "model.hpp"
+
 #include <vector>
 #include <cmath>
 

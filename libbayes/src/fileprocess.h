@@ -1,6 +1,6 @@
 #pragma once
 
-#include "model.hpp"
+#include "image.hpp"
 #include <iostream>
 #include <vector>
 #include <string>
@@ -13,6 +13,6 @@ namespace fileprocess {
     vector<Image> GetImages(vector<string> content);
     vector<char> GetLabels(vector<string> content);
     vector<string> ReadFile(string file_name);
-    void SaveModel(Model model);
-    Model GetModel(vector<string>);
+//    void SaveModel(Model model);
+//    Model GetModel(vector<string>);
 }

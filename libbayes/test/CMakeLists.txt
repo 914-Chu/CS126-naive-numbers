@@ -1,7 +1,6 @@
 add_executable(libbayes-tests main.cpp
-        imagetest.cpp
         modeltest.cpp
-        fileprocesstest.cpp)
+        )
 target_include_directories(libbayes-tests PRIVATE ./)
 
 target_link_libraries(libbayes-tests libbayes)

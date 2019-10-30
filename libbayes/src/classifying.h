@@ -1,7 +1,7 @@
 #pragma once
 
-#include "image.hpp"
 #include "model.hpp"
+#include "image.hpp"
 #include <vector>
 
 using namespace std;

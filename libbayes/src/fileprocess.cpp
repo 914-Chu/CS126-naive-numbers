@@ -1,9 +1,8 @@
 #include "fileprocess.h"
-#include "model.hpp"
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include <cstring>
 #include <string>
 
 using namespace std;

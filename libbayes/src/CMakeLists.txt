@@ -2,7 +2,10 @@
 # your main program and your test executable. If you add any .cpp files or headers
 # to libbayes, that code should get propagated to any CMake target that links to
 # libbayes.
-add_library(libbayes STATIC image.cpp model.cpp fileprocess.cpp classifying.cpp)
+add_library(libbayes STATIC image.cpp
+        fileprocess.cpp
+        model.cpp
+        classifying.cpp)
 
 # Declare the location of the header files we want to expose to people who
 # use this library. (If you DON'T want some header files to be publicly

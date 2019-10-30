@@ -1,10 +1,12 @@
 #include "classifying.h"
-#include "model.hpp"
+
 #include <vector>
 
 using namespace std;
 
+
 namespace classifying {
+
 
     char Classify(Image image, vector<vector<vector<vector<double>>>> model, vector<double> class_prob) {
 
@@ -49,6 +51,6 @@ namespace classifying {
                 match++;
             }
         }
-        return match / images.size();
+        return (match / images.size());
     }
 }

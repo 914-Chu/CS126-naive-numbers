@@ -1,8 +1,6 @@
 #include "image.hpp"
 
-
 using namespace std;
-
 
 Image::Image() {
     vector<vector<char>> init(kIMAGE_SIZE, vector<char>(kIMAGE_SIZE));
@@ -16,6 +14,17 @@ void Image::set(int row, int col, char character){
 
 char Image::get(int row, int col){
     return image[row][col];
+}
+
+ostream& operator<< (ostream& output, const Image& image) {
+
+    for(int row = 0; row < kIMAGE_SIZE; row++) {
+        for(int col = 0; col < kIMAGE_SIZE; col++) {
+            output << image.image[row][col] << " ";
+        }
+        output << endl;
+    }
+    return output;
 }
 
 

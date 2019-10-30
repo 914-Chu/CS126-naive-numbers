@@ -1,7 +1,7 @@
 #include "image.hpp"
+#include "classifying.h"
 #include "fileprocess.h"
 #include "model.hpp"
-#include "classifying.h"
 #include <iostream>
 #include <vector>
 
@@ -28,7 +28,7 @@ int main() {
     Model *model = new Model(train_images, train_labels);
     vector<Image>  test_images =  fileprocess::GetImages(fileprocess::ReadFile(file_names[2]));
     vector<char> test_labels = fileprocess::GetLabels(fileprocess::ReadFile(file_names[3]));
-    double accuracy = classifying::GetAccuracy(model, test_images, test_labels);
+    double accuracy = classifying::GetAccuracy(*model, test_images, test_labels);
     cout << accuracy << endl;
 
     return EXIT_SUCCESS;
