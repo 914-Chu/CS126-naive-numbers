@@ -23,7 +23,6 @@ const int kNumClasses = 10;  // 0-9 inclusive
 const int kShade = 2;
 const int kShaded = 0;
 const int kNotShaded = 1;
-const double kLaplaceSmooth = 1;
 const char kNotShade = ' ';
 
 class Model {
@@ -40,10 +39,11 @@ class Model {
     //double probs[kIMAGE_SIZE][kIMAGE_SIZE][kNUM_CLASSES][2];
 private:
 
-
+    double kLaplaceSmooth = 1;
     vector<vector<vector<vector<double>>>> probs_;
     vector<double> class_count_;
     vector<double> class_prob_;
+    int dataSize;
 
 public:
 
@@ -52,16 +52,18 @@ public:
     ~Model(){};
 
     //compute the model with given images and labels
-    vector<vector<vector<vector<double>>>> ComputeModel(vector<Image> images, vector<char> labels);
+    void PixelCount(vector<Image> images, vector<char> labels);
+    //
+    void CalculateProbs();
     //generate total counts for each class in the label vector
-    vector<double> GenerateClassCount(vector<char> labels, int classes);
+    vector<double> GenerateClassCount(vector<char> labels);
     //calculate the probability of each class
-    vector<double> GenerateClassProb(const vector<double> &class_count, int total_label);
+    vector<double> GenerateClassProb();
     //return 4d vectors of probs
     vector<vector<vector<vector<double>>>> getProbs() const;
     //return probability of classes
     vector<double> getClassProb() const;
     //
-
+    void setLaplaceSmooth(double num);
 };
 
