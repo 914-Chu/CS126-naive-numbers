@@ -24,6 +24,7 @@ const int kShade = 2;
 const int kShaded = 0;
 const int kNotShaded = 1;
 const double kLaplaceSmooth = 1;
+const char kNotShade = ' ';
 
 class Model {
     // The individual probabilities for each pixel for each class for
@@ -39,9 +40,11 @@ class Model {
     //double probs[kIMAGE_SIZE][kIMAGE_SIZE][kNUM_CLASSES][2];
 private:
 
-    vector<vector<vector<vector<double>>>> probs;
-    vector<double> class_count;
-    vector<double> class_prob;
+
+    vector<vector<vector<vector<double>>>> probs_;
+    vector<double> class_count_;
+    vector<double> class_prob_;
+
 public:
 
     Model(){};
@@ -58,5 +61,7 @@ public:
     vector<vector<vector<vector<double>>>> getProbs() const;
     //return probability of classes
     vector<double> getClassProb() const;
+    //
+
 };
 
