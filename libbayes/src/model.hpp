@@ -1,6 +1,7 @@
 #pragma once
 
 #include "image.hpp"
+#include "classifying.h"
 #include <vector>
 /*
  * We've given you a starter struct to represent the model.
@@ -24,12 +25,8 @@ constexpr size_t kShade = 2;
 const int kShaded = 0;
 const int kNotShaded = 1;
 const double kLaplaceSmooth = 1;
-/**
- * Represents a Naive Bayes classification model for determining the
- * likelihood that an individual pixel for an individual class is
- * white or black.
- */
-struct Model {
+
+class Model {
     // The individual probabilities for each pixel for each class for
     // whether it's shaded or not.
     //
@@ -41,12 +38,19 @@ struct Model {
     // [0][0] for class 0 is shaded.
 
     //double probs[kIMAGE_SIZE][kIMAGE_SIZE][kNUM_CLASSES][2];
+private:
     vector<vector<vector<vector<double>>>> probs;
-};
-
-namespace training{
+    vector<double> class_count;
+    vector<double> class_prob;
+public:
+    Model(){};
+    Model(vector<Image> images, vector<char> labels);
+    ~Model(){};
 
     vector<vector<vector<vector<double>>>> ComputeModel(vector<Image> images, vector<char> labels);
-    vector<double> GetClassCount(vector<char> labels, int classes);
-    vector<double> GetClassProb(vector<double> class_count, int total_label);
-}
+    vector<double> GenerateClassCount(vector<char> labels, int classes);
+    vector<double> GenerateClassProb(const vector<double> &class_count, int total_label);
+    vector<vector<vector<vector<double>>>> getProbs() const;
+    vector<double> getClassProb() const;
+};
+

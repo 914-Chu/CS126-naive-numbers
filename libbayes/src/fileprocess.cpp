@@ -38,6 +38,7 @@ namespace fileprocess {
     }
 
     vector<char> GetLabels(vector<string> content) {
+
         vector<char> characters;
         for (int i=0; i<content.size(); i++) {
             characters.push_back(content[i][0]);
@@ -59,7 +60,15 @@ namespace fileprocess {
         return content;
     }
 
-
-
-
+//    void SaveModel(Model model) {
+//
+//
+//    }
+//
+//    Model GetModel(vector<string> lines) {
+//
+//        vector<vector<vector<vector<double>>>> model(kIMAGE_SIZE,vector<vector<vector<double>>>
+//                (kIMAGE_SIZE, vector<vector<double>>(kNUM_CLASSES, vector<double>(kShade, 0.0))));
+//        for()
+//    }
 }
