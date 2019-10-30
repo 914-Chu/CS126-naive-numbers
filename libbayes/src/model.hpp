@@ -1,7 +1,6 @@
 #pragma once
 
 #include "image.hpp"
-#include "classifying.h"
 #include <vector>
 /*
  * We've given you a starter struct to represent the model.
@@ -39,18 +38,25 @@ class Model {
 
     //double probs[kIMAGE_SIZE][kIMAGE_SIZE][kNUM_CLASSES][2];
 private:
+
     vector<vector<vector<vector<double>>>> probs;
     vector<double> class_count;
     vector<double> class_prob;
 public:
+
     Model(){};
     Model(vector<Image> images, vector<char> labels);
     ~Model(){};
 
+    //compute the model with given images and labels
     vector<vector<vector<vector<double>>>> ComputeModel(vector<Image> images, vector<char> labels);
+    //generate total counts for each class in the label vector
     vector<double> GenerateClassCount(vector<char> labels, int classes);
+    //calculate the probability of each class
     vector<double> GenerateClassProb(const vector<double> &class_count, int total_label);
+    //return 4d vectors of probs
     vector<vector<vector<vector<double>>>> getProbs() const;
+    //return probability of classes
     vector<double> getClassProb() const;
 };
 

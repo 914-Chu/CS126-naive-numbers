@@ -34,7 +34,7 @@ namespace classifying {
         for(int num = 0; num < kNumClasses; num++){
             if(post_prob[num] > max){
                 max = post_prob[num];
-                max_num_class = static_cast<char>(num - '0');
+                max_num_class = static_cast<char>(num + '0');
             }
         }
         return max_num_class;

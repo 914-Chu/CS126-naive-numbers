@@ -56,7 +56,7 @@ vector<double> Model::GenerateClassCount(vector<char> labels, int classes){
     vector<double> count(classes, 0);
     for(const auto &character : labels){
         int num = character - '0';
-        labels[num]++;
+        count[num]++;
     }
     return count;
 }
