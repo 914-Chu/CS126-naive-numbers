@@ -24,10 +24,10 @@ namespace fileprocess {
     vector<Image> GetImages(vector<string> content) {
 
         vector<Image> images;
-        for(int line = 0; line < content.size(); line+=kIMAGE_SIZE){
+        for(int line = 0; line < content.size(); line += kImageSize){
             Image *image = new Image();
-            for(int row = 0; row < kIMAGE_SIZE; row++){
-                for(int col = 0; col < kIMAGE_SIZE; col++){
+            for(int row = 0; row < kImageSize; row++){
+                for(int col = 0; col < kImageSize; col++){
                     image->set(row,col,content[row][col]);
                 }
             }

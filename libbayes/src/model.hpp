@@ -20,8 +20,8 @@
  * You can delete this comment once you're done with it.
  */
 
-constexpr size_t kNUM_CLASSES = 10;  // 0-9 inclusive
-constexpr size_t kShade = 2;
+const int kNumClasses = 10;  // 0-9 inclusive
+const int kShade = 2;
 const int kShaded = 0;
 const int kNotShaded = 1;
 const double kLaplaceSmooth = 1;

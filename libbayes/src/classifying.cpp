@@ -10,12 +10,12 @@ namespace classifying {
 
     char Classify(Image image, vector<vector<vector<vector<double>>>> model, vector<double> class_prob) {
 
-        vector<double> post_prob(kNUM_CLASSES);
+        vector<double> post_prob(kNumClasses);
 
-        for(int num = 0; num < kNUM_CLASSES; num++) {
+        for(int num = 0; num < kNumClasses; num++) {
             double prob = class_prob[num];
-            for(int row = 0; row < kIMAGE_SIZE; row++) {
-                for(int col = 0; col < kIMAGE_SIZE; col++) {
+            for(int row = 0; row < kImageSize; row++) {
+                for(int col = 0; col < kImageSize; col++) {
                     if(image.get(row,col) == ' '){
                         prob += model[row][col][num][kNotShaded];
                     }else{
@@ -24,14 +24,14 @@ namespace classifying {
                 }
             }
         }
-        return FindMostLikelyClass(post_prob);
+        return FindMax(post_prob);
     }
 
-    char FindMostLikelyClass(vector<double> post_prob) {
+    char FindMax(vector<double> post_prob) {
 
         double max = 0;
         char max_num_class;
-        for(int num = 0; num < kNUM_CLASSES; num++){
+        for(int num = 0; num < kNumClasses; num++){
             if(post_prob[num] > max){
                 max = post_prob[num];
                 max_num_class = static_cast<char>(num - '0');
