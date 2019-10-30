@@ -15,15 +15,8 @@ void Image::set(int row, int col, char character){
     image[row][col] = character;
 }
 
-
-istream & operator >> (istream &in,  Image &image) {
-
-    return in;
-}
-
-ostream & operator << (ostream &out, const Image &image){
-
-    return out;
+char Image::get(int row, int col){
+    return image[row][col];
 }
 
 

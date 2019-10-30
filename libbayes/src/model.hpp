@@ -21,6 +21,9 @@
 
 constexpr size_t kNUM_CLASSES = 10;  // 0-9 inclusive
 constexpr size_t kShade = 2;
+const int kShaded = 0;
+const int kNotShaded = 1;
+const double kLaplaceSmooth = 1;
 /**
  * Represents a Naive Bayes classification model for determining the
  * likelihood that an individual pixel for an individual class is
@@ -45,4 +48,5 @@ namespace training{
 
     vector<vector<vector<vector<double>>>> ComputeModel(vector<Image> images, vector<char> labels);
     vector<double> GetClassCount(vector<char> labels, int classes);
+    vector<double> GetClassProb(vector<double> class_count, int total_label);
 }

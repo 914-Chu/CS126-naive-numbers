@@ -20,4 +20,5 @@ public:
     ~Image(){};
 
     void set(int row, int col, char character);
+    char get(int row, int col);
 };
