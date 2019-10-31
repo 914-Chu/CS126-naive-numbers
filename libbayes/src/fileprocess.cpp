@@ -12,7 +12,7 @@ namespace fileprocess {
     vector<string> GetFileNames(){
 
         string input;
-        cout << "Please enter file names.";
+        cout << "Please enter file names." << endl;
         cin >> input;
         istringstream iss(input);
         vector<string> file_name;
@@ -59,15 +59,15 @@ namespace fileprocess {
         return content;
     }
 
-//    void SaveModel(Model model) {
-//
-//
-//    }
-//
-//    Model GetModel(vector<string> lines) {
-//
-//        vector<vector<vector<vector<double>>>> model(kIMAGE_SIZE,vector<vector<vector<double>>>
-//                (kIMAGE_SIZE, vector<vector<double>>(kNUM_CLASSES, vector<double>(kShade, 0.0))));
-//        for()
-//    }
+    void SaveModel(Model model) {
+
+        ofstream file("model.txt");
+        if (file.is_open()) {
+            file << model;
+            file.close();
+        }else {
+            cout << "Unable to save file" << endl;
+        }
+    }
+
 }

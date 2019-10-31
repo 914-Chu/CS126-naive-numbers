@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <cmath>
+#include <fstream>
 
 using namespace std;
 
@@ -80,4 +81,92 @@ vector<double> Model::getClassProb() const {
 void Model::setLaplaceSmooth(double num) {
     kLaplaceSmooth = num;
 }
+
+char Model::Classify(Image image) {
+
+    vector<double> post_prob(kNumClasses);
+
+    for(int num = 0; num < kNumClasses; num++) {
+        double prob = class_prob_[num];
+        for(int row = 0; row < kImageSize; row++) {
+            for(int col = 0; col < kImageSize; col++) {
+                if(image.get(row,col) == ' '){
+                    prob += probs_[row][col][num][kNotShaded];
+                }else{
+                    prob += probs_[row][col][num][kShaded];
+                }
+            }
+        }
+    }
+    return FindMax(post_prob);
+}
+
+char Model::FindMax(vector<double> post_prob) {
+
+    double max = 0;
+    char max_num_class;
+    for(int num = 0; num < kNumClasses; num++){
+        if(post_prob[num] > max){
+            max = post_prob[num];
+            max_num_class = static_cast<char>(num + '0');
+        }
+    }
+    return max_num_class;
+}
+
+double Model::GetAccuracy(vector<Image> images, vector<char> labels){
+
+    int match = 0;
+    for(int index = 0; index < images.size(); index++){
+        char predict = Classify(images[index]);
+        if(predict == labels[index]){
+            match++;
+        }
+    }
+    return (match / images.size());
+}
+
+istream &operator>>(istream  &input, Model &model) {
+
+    string file_name;
+    input >> file_name;
+    ifstream file(file_name);
+    if(!file) {
+        cout << "can't read from file." << endl;
+    }
+
+    for(int num = 0; num < kNumClasses; num++){
+        file >> model.class_prob_[num];
+    }
+    for(int row = 0; row < kImageSize; row++) {
+        for(int col = 0; col < kImageSize; col++) {
+            for(int num = 0; num < kNumClasses; num++){
+                for(int shade = 0; shade < kShade; shade++){
+                    file >> model.probs_[row][col][num][shade];
+                }
+            }
+        }
+    }
+    cout << "read successfully" << endl;
+    return input;
+}
+
+ostream &operator<<(ostream &output, const Model &model) {
+
+    for(int num = 0; num < kNumClasses; num++){
+        output << model.class_prob_[num] << endl;
+    }
+    for(int row = 0; row < kImageSize; row++) {
+        for(int col = 0; col < kImageSize; col++) {
+            for(int num = 0; num < kNumClasses; num++){
+                for(int shade = 0; shade < kShade; shade++){
+                    output << model.probs_[row][col][num][shade] << endl;
+                }
+            }
+        }
+    }
+
+    return output;
+}
+
 

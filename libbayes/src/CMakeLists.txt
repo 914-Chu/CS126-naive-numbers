@@ -5,7 +5,7 @@
 add_library(libbayes STATIC image.cpp
         fileprocess.cpp
         model.cpp
-        classifying.cpp)
+        )
 
 # Declare the location of the header files we want to expose to people who
 # use this library. (If you DON'T want some header files to be publicly

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "image.hpp"
+#include <iostream>
 #include <vector>
 /*
  * We've given you a starter struct to represent the model.
@@ -51,9 +52,9 @@ public:
     Model(vector<Image> images, vector<char> labels);
     ~Model(){};
 
-    //compute the model with given images and labels
+    //get the total count for shade or not shaded pixel for all the images
     void PixelCount(vector<Image> images, vector<char> labels);
-    //
+    //compute the model with given images and labels
     void CalculateProbs();
     //generate total counts for each class in the label vector
     vector<double> GenerateClassCount(vector<char> labels);
@@ -63,7 +64,17 @@ public:
     vector<vector<vector<vector<double>>>> getProbs() const;
     //return probability of classes
     vector<double> getClassProb() const;
-    //
+    //set laplace smooth factor
     void setLaplaceSmooth(double num);
+    //Determine the most likely class
+    char Classify(Image image);
+    //Find max probability
+    char FindMax(vector<double> post_prob);
+    //Calculate accuracy of classification
+    double GetAccuracy(vector<Image> images, vector<char> labels);
+    //overload input operator
+    friend istream &operator>>( istream  &input, Model &model);
+    //overload output operator
+    friend ostream &operator<<( ostream &output, const Model &model);
 };
 
