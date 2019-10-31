@@ -12,15 +12,17 @@ namespace fileprocess {
     vector<string> GetFileNames(){
 
         string input;
+        string name;
         cout << "Please enter file names." << endl;
-        cin >> input;
+        getline(cin,input);
         istringstream iss(input);
         vector<string> file_name;
-        while (getline(iss, input, ' ')) {
-            file_name.push_back(input);
+        while (iss >> name) {
+            file_name.push_back(name);
         }
         return file_name;
     }
+
     vector<Image> GetImages(vector<string> content) {
 
         vector<Image> images;
@@ -33,6 +35,7 @@ namespace fileprocess {
             }
             images.push_back(*image);
         }
+        cout << "get image" << endl;
         return images;
     }
 
@@ -42,6 +45,7 @@ namespace fileprocess {
         for (int i=0; i<content.size(); i++) {
             characters.push_back(content[i][0]);
         }
+        cout << "get labels" << endl;
         return characters;
     }
 
@@ -56,6 +60,7 @@ namespace fileprocess {
             }
             file.close();
         }
+        cout << "read file" << endl;
         return content;
     }
 
@@ -65,6 +70,7 @@ namespace fileprocess {
         if (file.is_open()) {
             file << model;
             file.close();
+            cout << "saved file" << endl;
         }else {
             cout << "Unable to save file" << endl;
         }
